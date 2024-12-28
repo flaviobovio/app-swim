@@ -1,20 +1,42 @@
 <script setup>
+  import { ref, onMounted } from "vue";
+  import axios from "axios";
+  import SwimmerButton from "./SwimmerButton.vue";
+  import ModalForm from "./ModalForm.vue";
+  
+  // Props
+  defineProps({
+    msg: String,
+  });
 
-defineProps({
-  msg: String,
-})
+  // Reactive variables
+  const items = ref([]);
+  const loading = ref(true);
+  const error = ref(null);
 
-import SwimmerButton from './SwimmerButton.vue'
+  // Methods
+  const fetchData = async () => {
+    try {
+      const response = await axios.get("https://flavioboviovt.pythonanywhere.com/api/v1/swimmer/");
+      items.value = response.data;
+    } catch (err) {
+      error.value = "Failed to fetch data";
+    } finally {
+      loading.value = false;
+    }
+  };
 
+  // Fetch data on mount
+  onMounted(fetchData);
+
+  const handleClick = () => {
+    alert("Button clicked!");
+  };
 </script>
 
-
-
-
 <template>
-
-  <div class="container-fluid mt-5" >
-    <h3 class="text-center mb-5">{{msg}}</h3>
+  <div class="container-fluid mt-5">
+    <h3 class="text-center mb-5">{{ msg }}</h3>
 
     <!-- Table Header -->
     <div class="row bg-primary text-white fw-bold" data-bs-header>
@@ -37,63 +59,15 @@ import SwimmerButton from './SwimmerButton.vue'
       <div class="col-3" data-bs-cell>{{ item.city }}</div>
       <div class="col-1" data-bs-cell>
         <SwimmerButton 
-          variant="secondary"
+          variant="info"
           @click="handleClick"
         >Ver</SwimmerButton>
       </div>      
     </div>
     <p v-if="loading">Cargando...</p>
     <p v-if="error">{{ error }}</p>   
-
   </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
 </template>
-
-
-
-<script>
-  import axios from "axios";
-
-  export default {
-    data() {
-      return {
-        items: [], // Array to store fetched data
-        loading: true, // Loading state
-        error: null, // Error message
-      };
-    },
-    methods: {
-      async fetchData() {
-        try {
-          const response = await axios.get("https://flavioboviovt.pythonanywhere.com/api/v1/swimmer/");
-          this.items = response.data; // Update the items with API response
-        } catch (err) {
-          this.error = "Failed to fetch data"; // Set error message if request fails
-        } finally {
-          this.loading = false; // Turn off loading state
-        }
-      },
-    },
-    mounted() {
-      this.fetchData(); // Fetch data when the component is mounted
-    },
-
-  };
-</script>
-
-
 
 
 
