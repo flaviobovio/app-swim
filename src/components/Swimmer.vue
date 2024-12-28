@@ -1,18 +1,23 @@
 <script setup>
-// import { ref } from 'vue'
 
 defineProps({
   msg: String,
 })
+
+import SwimmerButton from './SwimmerButton.vue'
+
 </script>
+
+
+
 
 <template>
 
-  <div class="container-fluid mt-5" style="width: 100%;">
-    <h2 class="text-center mb-5">{{msg}}</h2>
+  <div class="container-fluid mt-5" >
+    <h3 class="text-center mb-5">{{msg}}</h3>
 
     <!-- Table Header -->
-    <div class="row bg-primary text-white fw-bold" data-bs-header style="width: 100%;">
+    <div class="row bg-primary text-white fw-bold" data-bs-header>
       <div class="col-4" data-bs-cell>Nombre</div>
       <div class="col-1" data-bs-cell>Edad</div>
       <div class="col-3" data-bs-cell>Club</div>
@@ -25,13 +30,17 @@ defineProps({
       class="row border-bottom py-2 align-items-center"
       v-for="item in items" :key="item.id"
       data-bs-row
-      style="width: 100%;"
     >
       <div class="col-4" data-bs-cell>{{ item.name }}</div>
       <div class="col-1" data-bs-cell>{{ item.age }}</div>
       <div class="col-3" data-bs-cell>{{ item.club }}</div>
       <div class="col-3" data-bs-cell>{{ item.city }}</div>
-      <div class="col-1" data-bs-cell><Button class="data-bs-button">Ver</Button></div>      
+      <div class="col-1" data-bs-cell>
+        <SwimmerButton 
+          variant="secondary"
+          @click="handleClick"
+        >Ver</SwimmerButton>
+      </div>      
     </div>
     <p v-if="loading">Cargando...</p>
     <p v-if="error">{{ error }}</p>   
@@ -80,6 +89,7 @@ defineProps({
     mounted() {
       this.fetchData(); // Fetch data when the component is mounted
     },
+
   };
 </script>
 
@@ -88,6 +98,8 @@ defineProps({
 
 
 <style scoped>
+
+
 .row {
   display: flex;
   align-items: center;

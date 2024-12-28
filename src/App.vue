@@ -1,20 +1,15 @@
 <script setup>
-import Swimmer from './components/Swimmer.vue'
+  import Swimmer from './components/Swimmer.vue'
 </script>
 
 <template>
-  <!-- <div>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div> -->
-  <div class="container-fluid" style="width: 100%;">
+  <div>
     <Swimmer msg="Listado Nadadores" />
   </div>
-  
 </template>
 
 <style scoped>
+
 /* .logo {
   height: 6em;
   padding: 1.5em;
