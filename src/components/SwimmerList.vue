@@ -1,8 +1,11 @@
 <script setup>
   import { ref, onMounted } from "vue";
-  import axios from "axios";
-  import SwimmerButton from "./SwimmerButton.vue";
-  import ModalForm from "./ModalForm.vue";
+  import { useRouter } from 'vue-router';
+  import api from "../api"; 
+
+
+
+  const router = useRouter();
   
   // Props
   defineProps({
@@ -17,7 +20,7 @@
   // Methods
   const fetchData = async () => {
     try {
-      const response = await axios.get("https://flavioboviovt.pythonanywhere.com/api/v1/swimmer/");
+      const response = await api.get("/swimmer/");
       items.value = response.data;
     } catch (err) {
       error.value = "Failed to fetch data";
@@ -29,22 +32,36 @@
   // Fetch data on mount
   onMounted(fetchData);
 
-  const handleClick = () => {
-    alert("Button clicked!");
-  };
+const handleClick = (swimmer) => {
+  router.push(`/swimmerDetail/${swimmer.id}`);
+};
+
+const handleClickAdd = () => {
+  router.push(`/swimmerDetail/new`);
+};
+
+
+
 </script>
 
 <template>
   <div class="container-fluid mt-5">
     <h3 class="text-center mb-5">{{ msg }}</h3>
 
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2>🏊 Nadadores</h2>
+      <button class="btn btn-primary" @click="() => handleClickAdd()">
+        ➕ Agregar
+      </button>
+    </div>    
+
     <!-- Table Header -->
-    <div class="row bg-primary text-white fw-bold" data-bs-header>
+    <div class="row bg-primary text-white " data-bs-header>
       <div class="col-4" data-bs-cell>Nombre</div>
-      <div class="col-1" data-bs-cell>Edad</div>
-      <div class="col-3" data-bs-cell>Club</div>
-      <div class="col-3" data-bs-cell>Ciudad</div>
-      <div class="col-1" data-bs-cell> </div>      
+      <div class="col-2" data-bs-cell>Edad</div>
+      <div class="col-2" data-bs-cell>Club</div>
+      <div class="col-2" data-bs-cell>Ciudad</div>
+      <div class="col-2" data-bs-cell> </div>      
     </div>
 
     <!-- Table Rows -->
@@ -54,14 +71,11 @@
       data-bs-row
     >
       <div class="col-4" data-bs-cell>{{ item.name }}</div>
-      <div class="col-1" data-bs-cell>{{ item.age }}</div>
-      <div class="col-3" data-bs-cell>{{ item.club }}</div>
-      <div class="col-3" data-bs-cell>{{ item.city }}</div>
-      <div class="col-1" data-bs-cell>
-        <SwimmerButton 
-          variant="info"
-          @click="handleClick"
-        >Ver</SwimmerButton>
+      <div class="col-2" data-bs-cell>{{ item.age }}</div>
+      <div class="col-2" data-bs-cell>{{ item.club }}</div>
+      <div class="col-2" data-bs-cell>{{ item.city }}</div>
+      <div class="col-2" data-bs-cell>
+        <button type="button" class="btn btn-primary" @click="() => handleClick(item)">📄</button>
       </div>      
     </div>
     <p v-if="loading">Cargando...</p>

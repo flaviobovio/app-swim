@@ -3,6 +3,16 @@ import './style.css'
 import App from './App.vue'
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap"
+import router from './router.js'
+import Vue3Toastify from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css'
 
-createApp(App).mount('#app')
+const app = createApp(App)
 
+app.use(router)
+app.use(Vue3Toastify, {
+  autoClose: 1000,
+  position: 'bottom-right',
+})
+
+app.mount('#app')
