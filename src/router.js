@@ -3,10 +3,12 @@ import SwimmerList from './components/SwimmerList.vue'
 import SwimmerDetail from './components/SwimmerDetail.vue';
 import DateList from './components/DateList.vue'
 import DateDetail from './components/DateDetail.vue'
+import LoginView from './components/LoginView.vue';
 import NotImplementedYet from './components/NotImplementedYet.vue'
 
 const routes = [
   { path: '/', component: NotImplementedYet },
+  { path: '/login', component: LoginView },
   { path: '/swimmerList', component: SwimmerList },  
   { path: '/swimmerDetail/new', name: 'SwimmerCreate', component: SwimmerDetail,},  
   { path: '/swimmerDetail/:id', name: 'SwimmerEdit', component: SwimmerDetail, props: true },

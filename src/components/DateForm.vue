@@ -6,12 +6,13 @@
       </div>
   
       <div class="mb-4">
+        <label class="form-label">Activa</label>
         <button
             type="button"
             class="btn btn-transparent"
             @click="modelValue.active = !modelValue.active"
         >
-            {{ modelValue.active ? '✅ Activa' : '🔲 Inactiva' }}
+            {{ modelValue.active ? '✅' : '🔲' }}
         </button>
       </div>      
 

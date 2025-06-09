@@ -1,24 +1,17 @@
 <script setup>
   import { ref, onMounted } from "vue";
-  import { useRouter } from 'vue-router';
-  import api from "../api";
+  import { useRouter, useRoute } from 'vue-router';
+  import api from "../axios";
+  import { useSuccessToast } from '../composables/useSuccessToast.js';
+
+  useSuccessToast();
 
 
   const router = useRouter();
-
-  onMounted(() => {
-  if (router.query.success) {
-    toast.success(router.query.success);
-
-    // Limpia el query param para que no vuelva a aparecer si refrescan
-    const url = new URL(window.location);
-    url.searchParams.delete('success');
-    window.history.replaceState({}, '', url);
-  }
-});
+  // const route = useRoute();
 
 
-
+  
   
   // Props
   defineProps({
@@ -42,8 +35,8 @@
     }
   };
 
-  // Fetch data on mount
-  onMounted(fetchData);
+// Fetch data on mount
+onMounted(fetchData);
 
 const handleClickEdit = (date) => {
   router.push(`/dateDetail/${date.id}`);

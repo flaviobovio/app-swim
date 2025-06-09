@@ -15,7 +15,7 @@
   import { useRouter, useRoute } from 'vue-router';
   import { toast } from 'vue3-toastify';  
   import SwimmerForm from './SwimmerForm.vue';
-  import api from '../api';
+  import api from '../axios';
   
   const router = useRouter();
   const route = useRoute();
@@ -51,7 +51,7 @@
         await api.put(`/swimmer/${id}/`, form);
         toast.success('Swimmer updated!');
       }
-      router.push('/');
+      router.push('/swimmerList/');
     } catch {
       toast.error('Failed to save swimmer');
     }
@@ -62,7 +62,7 @@
     try {
       await api.delete(`/swimmer/${id}/`);
       toast.success('Swimmer deleted');
-      router.push('/');
+      router.push('/swimmerList/');
     } catch {
       toast.error('Failed to delete swimmer');
     }

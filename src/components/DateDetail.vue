@@ -8,14 +8,15 @@
         @delete="handleDelete"
       />
     </div>
-  </template>
+</template>
   
-  <script setup>
+<script setup>
   import { reactive, onMounted, computed } from 'vue';
   import { useRouter, useRoute } from 'vue-router';
+  
   import { toast } from 'vue3-toastify';  
   import DateForm from './DateForm.vue';
-  import api from '../api';
+  import api from '../axios';
   
   const router = useRouter();
   const route = useRoute();
@@ -26,7 +27,7 @@
   
   const form = reactive({
     date: '',
-    active: '',
+    active: false,
   });
   
   onMounted(async () => {
@@ -58,8 +59,8 @@
     if (!confirm('Borrar fecha?')) return;
     try {
       await api.delete(`/date/${id}/`);
-      toast.success('Fecha borrada');
       router.push('/dateList/');      
+      router.push({ path: '/dateList/', query: { success: 'Fecha borrada' } });
     } catch {
       toast.error('Falla al borrar fecha');
     }

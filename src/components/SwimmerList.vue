@@ -1,7 +1,7 @@
 <script setup>
   import { ref, onMounted } from "vue";
   import { useRouter } from 'vue-router';
-  import api from "../api"; 
+  import api from "../axios"; 
 
 
 
@@ -72,7 +72,7 @@ const handleClickAdd = () => {
     >
       <div class="col-4" data-bs-cell>{{ item.name }}</div>
       <div class="col-2" data-bs-cell>{{ item.age }}</div>
-      <div class="col-2" data-bs-cell>{{ item.club }}</div>
+      <div class="col-2" data-bs-cell>{{ item.club.name }}</div>
       <div class="col-2" data-bs-cell>{{ item.city }}</div>
       <div class="col-2" data-bs-cell>
         <button type="button" class="btn btn-primary" @click="() => handleClick(item)">📄</button>
