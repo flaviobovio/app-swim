@@ -2,7 +2,9 @@
   import { ref, onMounted } from "vue";
   import { useRouter } from 'vue-router';
   import api from "../axios"; 
+  import { useSuccessToast } from '../composables/useSuccessToast.js';
 
+  useSuccessToast();
 
 
   const router = useRouter();
@@ -58,7 +60,8 @@ const handleClickAdd = () => {
     <!-- Table Header -->
     <div class="row bg-primary text-white " data-bs-header>
       <div class="col-4" data-bs-cell>Nombre</div>
-      <div class="col-2" data-bs-cell>Edad</div>
+      <div class="col-1" data-bs-cell>Sexo</div>
+      <div class="col-1" data-bs-cell>Edad</div>
       <div class="col-2" data-bs-cell>Club</div>
       <div class="col-2" data-bs-cell>Ciudad</div>
       <div class="col-2" data-bs-cell> </div>      
@@ -71,7 +74,8 @@ const handleClickAdd = () => {
       data-bs-row
     >
       <div class="col-4" data-bs-cell>{{ item.name }}</div>
-      <div class="col-2" data-bs-cell>{{ item.age }}</div>
+      <div class="col-1" data-bs-cell>{{ item.sex }}</div>
+      <div class="col-1" data-bs-cell>{{ item.age }}</div>
       <div class="col-2" data-bs-cell>{{ item.club.name }}</div>
       <div class="col-2" data-bs-cell>{{ item.city }}</div>
       <div class="col-2" data-bs-cell>

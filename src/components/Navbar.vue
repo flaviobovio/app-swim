@@ -20,7 +20,7 @@
               <router-link to="/swimmerList" class="nav-link" active-class="active">Nadadores</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/clubs" class="nav-link" active-class="active">Clubs</router-link>
+              <router-link to="/clubList" class="nav-link" active-class="active">Clubs</router-link>
             </li>
             <li class="nav-item">
               <router-link to="/categories" class="nav-link" active-class="active">Categorias</router-link>

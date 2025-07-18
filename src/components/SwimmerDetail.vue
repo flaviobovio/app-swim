@@ -45,15 +45,14 @@
   const handleSubmit = async () => {
     try {
       if (isNew.value) {
+        console.log('Submitting new swimmer:', form);
         await api.post('/swimmer/', form);
-        toast.success('Swimmer added!');
       } else {
         await api.put(`/swimmer/${id}/`, form);
-        toast.success('Swimmer updated!');
       }
-      router.push('/swimmerList/');
+      router.push({ path: '/swimmerList/', query: { success: isNew.value ? 'Nadador agregado' : 'Nadador actualizado' } });
     } catch {
-      toast.error('Failed to save swimmer');
+      toast.error('Falla al guardar nadador');
     }
   };
   
@@ -61,10 +60,9 @@
     if (!confirm('Are you sure you want to delete this swimmer?')) return;
     try {
       await api.delete(`/swimmer/${id}/`);
-      toast.success('Swimmer deleted');
-      router.push('/swimmerList/');
+      router.push({path: '/swimmerList/', query: { success: 'Nadador borrado' } });
     } catch {
-      toast.error('Failed to delete swimmer');
+      toast.error('Falla al borrar nadador');
     }
   };
   </script>

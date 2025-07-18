@@ -5,6 +5,8 @@ import DateList from './components/DateList.vue'
 import DateDetail from './components/DateDetail.vue'
 import LoginView from './components/LoginView.vue';
 import NotImplementedYet from './components/NotImplementedYet.vue'
+import ClubList from './components/ClubList.vue';
+import ClubDetail from './components/ClubDetail.vue';
 
 const routes = [
   { path: '/', component: NotImplementedYet },
@@ -12,10 +14,12 @@ const routes = [
   { path: '/swimmerList', component: SwimmerList },  
   { path: '/swimmerDetail/new', name: 'SwimmerCreate', component: SwimmerDetail,},  
   { path: '/swimmerDetail/:id', name: 'SwimmerEdit', component: SwimmerDetail, props: true },
-  { path: '/clubs', component: NotImplementedYet },
+  { path: '/clubList', component: ClubList },
+  { path: '/clubDetail/new', name: 'ClubCreate', component: ClubDetail,},
+  { path: '/clubDetail/:id', component: ClubDetail, props: true },  
   { path: '/categories', component: NotImplementedYet },
   { path: '/results', component: NotImplementedYet },    
-  { path: '/dateList', component: DateList },      
+  { path: '/dateList', component: DateList },
   { path: '/dateDetail/new', name: 'DateCreate', component: DateDetail,},  
   { path: '/dateDetail/:id', component: DateDetail, props: true },
   { path: '/markList', component: NotImplementedYet },    
