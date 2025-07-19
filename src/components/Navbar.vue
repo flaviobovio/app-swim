@@ -17,22 +17,22 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <router-link to="/swimmerList" class="nav-link" active-class="active">Nadadores</router-link>
+              <router-link to="/swimmerList" class="nav-link" active-class="active">🏊 Nadadores</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/clubList" class="nav-link" active-class="active">Clubs</router-link>
+              <router-link to="/clubList" class="nav-link" active-class="active">🔰 Clubs</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/categories" class="nav-link" active-class="active">Categorias</router-link>
+              <router-link to="/categoryList" class="nav-link" active-class="active">👥 Categorias</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/results" class="nav-link" active-class="active">Resultados</router-link>
+              <router-link to="/dateList" class="nav-link" active-class="active">📅 Fechas</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/dateList" class="nav-link" active-class="active">Fechas</router-link>
+              <router-link to="/markList" class="nav-link" active-class="active">⏱️ Marcas</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/markList" class="nav-link" active-class="active">Marcas</router-link>
+              <router-link to="/results" class="nav-link" active-class="active">🏅 Resultados</router-link>
             </li>
 
 

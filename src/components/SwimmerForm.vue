@@ -43,8 +43,6 @@
   
 <script setup>
 
-
-  // import { ref } from 'vue';
   import ClubSelect from './ClubSelect.vue';
 
   defineProps({
