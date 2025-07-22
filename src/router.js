@@ -12,6 +12,7 @@ import CategoryList from './components/CategoryList.vue';
 import CategoryDetail from './components/CategoryDetail.vue';
 
 import MarkList from './components/MarkList.vue';
+import MarkDetail from './components/MarkDetail.vue';
 
 
 import NotImplementedYet from './components/NotImplementedYet.vue'
@@ -30,6 +31,8 @@ const routes = [
   { path: '/categoryDetail/:id', component: CategoryDetail, props: true },  
 
   { path: '/markList', component: MarkList },
+  { path: '/markDetail/new', name: 'MarkCreate', component: MarkDetail,},
+  { path: '/markDetail/:id', component: MarkDetail, props: true },  
 
   { path: '/results', component: NotImplementedYet },    
   { path: '/dateList', component: DateList },

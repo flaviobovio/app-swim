@@ -1,6 +1,6 @@
 <template>
     <div class="container mt-4">
-      <h3>{{ isNew ? 'Agregar Fecha' : 'Editar Fecha' }}</h3>
+      <h3>📅 {{ isNew ? 'Agregar Fecha' : 'Editar Fecha' }}</h3>
       <DateForm
         v-model="form"
         :isNew="isNew"

@@ -1,6 +1,6 @@
 <template>
     <div class="container mt-4">
-      <h3>{{ isNew ? 'Add New Swimmer' : 'Edit Swimmer' }}</h3>
+      <h3>🏊 {{ isNew ? 'Add New Swimmer' : 'Edit Swimmer' }}</h3>
       <SwimmerForm
         v-model="form"
         :isNew="isNew"

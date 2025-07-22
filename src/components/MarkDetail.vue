@@ -1,7 +1,7 @@
 <template>
     <div class="container mt-4">
-      <h3>🔰 {{ isNew ? 'Agregar Club' : 'Editar Club' }}</h3>
-      <ClubForm
+      <h3>⏱️ {{ isNew ? 'Agregar Marca' : 'Editar Marca' }}</h3>
+      <MarkForm
         v-model="form"
         :isNew="isNew"
         @submit="handleSubmit"
@@ -14,7 +14,7 @@
   import { reactive, onMounted, computed } from 'vue';
   import { useRouter, useRoute } from 'vue-router';
   import { toast } from 'vue3-toastify';  
-  import ClubForm from './ClubForm.vue';
+  import MarkForm from './MarkForm.vue';
   import api from '../axios';
   
   const router = useRouter();
@@ -25,17 +25,18 @@
 
   
   const form = reactive({
-    name: '',
-    city: '',
+    swimmer: '',
+    date: '',
+    meters: '',
   });
   
   onMounted(async () => {
     if (!isNew.value) {
       try {
-        const response = await api.get(`/club/${id}/`);
+        const response = await api.get(`/mark/${id}/`);
         Object.assign(form, response.data);
       } catch {
-        toast.error(`Error al cargar club`);
+        toast.error(`Error al cargar marca`);
       }
     }
   });
@@ -43,25 +44,25 @@
   const handleSubmit = async () => {
     try {
       if (isNew.value) {
-        await api.post('/club/', form);
+        await api.post('/mark/', form);
       } else {
-        await api.put(`/club/${id}/`, form);
+        await api.put(`/mark/${id}/`, form);
       }
-      router.push({ path: '/clubList/', query: { success: isNew.value ? 'Club agregado' : 'Club actualizado' } });
+      router.push({ path: '/markList/', query: { success: isNew.value ? 'Marca agregada' : 'Marca actualizada' } });
 
     } catch {
-      toast.error('Falla al guardar club');
+      toast.error('Falla al guardar marca');
     }
   };
   
   const handleDelete = async () => {
     if (!confirm('Borrar marca?')) return;
     try {
-      await api.delete(`/club/${id}/`);
-      router.push('/clubList/');      
-      router.push({ path: '/clubList/', query: { success: 'Club borrado' } });
+      await api.delete(`/mark/${id}/`);
+      router.push('/markList/');      
+      router.push({ path: '/markList/', query: { success: 'Marca borrada' } });
     } catch {
-      toast.error('Falla al borrar club');
+      toast.error('Falla al borrar marca');
     }
   };
   </script>

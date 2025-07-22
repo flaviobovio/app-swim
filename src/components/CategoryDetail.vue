@@ -1,6 +1,6 @@
 <template>
     <div class="container mt-4">
-      <h3>{{ isNew ? 'Agregar Categoría' : 'Editar Categoría' }}</h3>
+      <h3>👥 {{ isNew ? 'Agregar Categoría' : 'Editar Categoría' }}</h3>
       <CategoryForm
         v-model="form"
         :isNew="isNew"
