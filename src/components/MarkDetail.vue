@@ -25,9 +25,11 @@
 
   
   const form = reactive({
-    swimmer: '',
-    date: '',
-    meters: '',
+    swimmer: 0,
+    date: 0,
+    meters: 0,
+    swimmer_detail: { name: '' },
+    date_detail: { date: '' },
   });
   
   onMounted(async () => {
@@ -45,7 +47,8 @@
     try {
       if (isNew.value) {
         await api.post('/mark/', form);
-      } else {
+      } 
+      else {
         await api.put(`/mark/${id}/`, form);
       }
       router.push({ path: '/markList/', query: { success: isNew.value ? 'Marca agregada' : 'Marca actualizada' } });

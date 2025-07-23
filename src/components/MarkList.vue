@@ -28,7 +28,6 @@
     try {
       const response = await api.get("/mark/");
       items.value = response.data;
-      console.log(response.data);
     } catch (err) {
       error.value = "Error al cargar datos";
     } finally {
@@ -76,8 +75,8 @@ const handleClickAdd = () => {
       v-for="item in items" :key="item.id"
       data-bs-row
     >
-      <div class="col-4" data-bs-cell>{{ item.swimmer.name }}</div>
-      <div class="col-2" data-bs-cell>{{ item.date.date }}</div>
+      <div class="col-4" data-bs-cell>{{ item.swimmer_detail.name }}</div>
+      <div class="col-2" data-bs-cell>{{ item.date_detail.date }}</div>
       <div class="col-2" data-bs-cell>{{ item.meters }}</div>      
 
       <div class="col-2" data-bs-cell>

@@ -1,34 +1,37 @@
 <template>
-  <div class="d-flex align-items-start gap-2 w-100">
-    <input
-      type="text"
-      class="form-control"
-      placeholder="Buscar nadador..."
-      v-model="search"
-      @input="onSearch"
-    />
+  <div class="row w-100 g-2">
+    <div class="col-12 col-md-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Nombre / DNI"
+        v-model="search"
+        @input="onSearch"
+      />
+    </div>
 
-    <select
-      v-if="search.length >= 3"
-      :value="modelValue"
-      @change="onChange"
-      class="form-select"
-      :required="required"
-      style="max-width: 250px;"
-    >
-      <option v-if="swimmers.length === 0" disabled value="">
-        No se encontró ningún nadador
-      </option>
-      <option
-        v-for="swimmer in swimmers"
-        :key="swimmer.id"
-        :value="swimmer.id"
+    <div class="col-12 col-md-9" v-if="search.length >= 3">
+      <select
+        :value="modelValue"
+        @change="onChange"
+        class="form-select"
+        :required="required"
       >
-        {{ swimmer.name }} ({{ swimmer.age }})
-      </option>
-    </select>
+        <option v-if="swimmers.length === 0" disabled value="">
+          No se encontró ningún nadador
+        </option>
+        <option
+          v-for="swimmer in swimmers"
+          :key="swimmer.id"
+          :value="swimmer.id"
+        >
+          {{ swimmer.name }} ({{ swimmer.age }})
+        </option>
+      </select>
+    </div>
   </div>
 </template>
+
 
 <script setup>
 import { ref } from 'vue';
@@ -63,7 +66,7 @@ const fetchSwimmers = async () => {
     });
     swimmers.value = response.data;
 
-    // Auto-selecciona el primer nadador si hay resultados
+    // Select first swimmer if available
     if (swimmers.value.length > 0) {
       emit('update:modelValue', swimmers.value[0].id);
     } else {

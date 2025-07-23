@@ -1,14 +1,24 @@
 <template>
     <form @submit.prevent="$emit('submit')" class="mt-3">
-        <div class="mb-3">
-            <label class="form-label">Nadador</label>
-            <!-- <input v-model="modelValue.swimmer" class="form-control" required /> -->
-            <SwimmerSelect v-model="modelValue.swimmer.id" required />
-        </div>
+      <div class="mb-3">
+          <label class="form-label">Nadador</label>
+          <template v-if="isNew">
+            <SwimmerSelect v-model="modelValue.swimmer" required />
+          </template>
+          <template v-else>
+            <input v-model="modelValue.swimmer_detail.name" readonly class="form-control" />
+          </template>
 
-        <div class="mb-3">
+      </div>
+
+      <div class="mb-3">
         <label class="form-label">Fecha</label>
-        <input v-model="modelValue.date.date" class="form-control" required />
+        <template v-if="isNew">
+          <DateSelect v-model="modelValue.date" required />
+        </template>
+        <template v-else>
+          <input v-model="modelValue.date_detail.date" readonly class="form-control" />
+        </template>
       </div>
   
        <div class="mb-3">
@@ -29,6 +39,7 @@
   
 <script setup>
   import SwimmerSelect from './SwimmerSelect.vue';
+  import DateSelect from './DateSelect.vue';
   defineProps({
     modelValue: Object,
     isNew: Boolean,

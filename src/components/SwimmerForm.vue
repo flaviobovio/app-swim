@@ -6,6 +6,11 @@
       </div>
   
       <div class="mb-3">
+        <label class="form-label">Documento</label>
+        <input v-model="modelValue.identification" class="form-control" required />
+      </div>
+
+      <div class="mb-3">
         <label class="form-label">Sex</label>
         <select id="sex" v-model="modelValue.sex" class="form-control" required>
           <option disabled value="">Please select one</option>

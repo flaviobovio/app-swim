@@ -5,13 +5,12 @@
       class="form-control"
       :required="required"
     >
-      <option disabled value="">Seleccione una fecha</option>
       <option
         v-for="date in dates"
         :key="date.id"
         :value="date.id"
       >
-        {{ date.name }}
+        {{ date.date }}
       </option>
     </select>
   </template>
@@ -20,7 +19,7 @@
   import { ref, onMounted } from 'vue';
   import api from "../axios";
   
-  // Props y eventos
+  // Props & Events
   const props = defineProps({
     modelValue: [String, Number],
     required: {
@@ -30,16 +29,22 @@
   });
   const emit = defineEmits(['update:modelValue']);
   
-  // Datos
+  // Date variables
   const dates = ref([]);
   const loading = ref(true);
   const error = ref(null);
   
-  // Cargar fechas
+  // Load dates 
   const fetchDates = async () => {
     try {
-      const response = await api.get('/date/');
+      const response = await api.get('/date/?active=true');
       dates.value = response.data;
+
+      // Select first date if available
+      if (dates.value.length > 0) {
+        emit('update:modelValue', dates.value[0].id); 
+      }
+
     } catch (err) {
       error.value = 'Error al cargar fechas';
     } finally {

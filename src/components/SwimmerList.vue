@@ -59,7 +59,8 @@ const handleClickAdd = () => {
 
     <!-- Table Header -->
     <div class="row bg-primary text-white " data-bs-header>
-      <div class="col-4" data-bs-cell>Nombre</div>
+      <div class="col-3" data-bs-cell>Nombre</div>
+      <div class="col-1" data-bs-cell>Documento</div>
       <div class="col-1" data-bs-cell>Sexo</div>
       <div class="col-1" data-bs-cell>Edad</div>
       <div class="col-2" data-bs-cell>Club</div>
@@ -73,10 +74,11 @@ const handleClickAdd = () => {
       v-for="item in items" :key="item.id"
       data-bs-row
     >
-      <div class="col-4" data-bs-cell>{{ item.name }}</div>
+      <div class="col-3" data-bs-cell>{{ item.name }}</div>
+      <div class="col-1" data-bs-cell>{{ item.identification }}</div>
       <div class="col-1" data-bs-cell>{{ item.sex }}</div>
       <div class="col-1" data-bs-cell>{{ item.age }}</div>
-      <div class="col-2" data-bs-cell>{{ item.club.name }}</div>
+      <div class="col-2" data-bs-cell>{{ item.club_detail.name }}</div>
       <div class="col-2" data-bs-cell>{{ item.city }}</div>
       <div class="col-2" data-bs-cell>
         <button type="button" class="btn btn-primary" @click="() => handleClick(item)">📄</button>

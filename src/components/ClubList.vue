@@ -28,7 +28,6 @@
     try {
       const response = await api.get("/club/");
       items.value = response.data;
-      console.log(response.data);
     } catch (err) {
       error.value = "Error al cargar datos";
     } finally {
