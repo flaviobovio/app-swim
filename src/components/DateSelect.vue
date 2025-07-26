@@ -10,7 +10,7 @@
         :key="date.id"
         :value="date.id"
       >
-        {{ date.date }}
+        {{ date.name }} - {{ formatDate(date.date) }}
       </option>
     </select>
   </template>
@@ -18,6 +18,7 @@
   <script setup>
   import { ref, onMounted } from 'vue';
   import api from "../axios";
+  import { formatDate } from '../utils/formatDate.js';
   
   // Props & Events
   const props = defineProps({

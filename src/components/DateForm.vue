@@ -1,10 +1,15 @@
 <template>
     <form @submit.prevent="$emit('submit')" class="mt-3">
       <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input type="text" v-model="modelValue.name" class="form-control" required />
+      </div>
+  
+      <div class="mb-3">
         <label class="form-label">Fecha</label>
         <input type="date" v-model="modelValue.date" class="form-control" required />
       </div>
-  
+
       <div class="mb-4">
         <label class="form-label">Activa</label>
         <button

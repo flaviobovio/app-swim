@@ -3,6 +3,7 @@
   import { useRouter, useRoute } from 'vue-router';
   import api from "../axios";
   import { useSuccessToast } from '../composables/useSuccessToast.js';
+  import { formatDate } from "../utils/formatDate.js";
 
   useSuccessToast();
 
@@ -63,6 +64,7 @@ const handleClickAdd = () => {
 
     <!-- Table Header -->
     <div class="row bg-primary text-white " data-bs-header>
+      <div class="col-4" data-bs-cell>Nombre</div>
       <div class="col-4" data-bs-cell>Fecha</div>
       <div class="col-2" data-bs-cell>Activa</div>
       <div class="col-2" data-bs-cell> </div>      
@@ -74,7 +76,8 @@ const handleClickAdd = () => {
       v-for="item in items" :key="item.id"
       data-bs-row
     >
-      <div class="col-4" data-bs-cell>{{ item.date }}</div>
+      <div class="col-4" data-bs-cell>{{ item.name }}</div>    
+      <div class="col-4" data-bs-cell>{{ formatDate(item.date) }}</div>
       <div class="col-2" data-bs-cell>{{ (item.active) ? "☑️" : "" }}</div>
 
       <div class="col-2" data-bs-cell>

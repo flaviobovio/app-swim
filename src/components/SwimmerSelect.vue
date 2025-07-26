@@ -25,7 +25,7 @@
           :key="swimmer.id"
           :value="swimmer.id"
         >
-          {{ swimmer.name }} ({{ swimmer.age }})
+          {{ swimmer.name }} ({{ swimmer.age }}) - {{ swimmer.identification }}
         </option>
       </select>
     </div>

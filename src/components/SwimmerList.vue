@@ -63,9 +63,10 @@ const handleClickAdd = () => {
       <div class="col-1" data-bs-cell>Documento</div>
       <div class="col-1" data-bs-cell>Sexo</div>
       <div class="col-1" data-bs-cell>Edad</div>
-      <div class="col-2" data-bs-cell>Club</div>
+      <div class="col-2" data-bs-cell>Categoría</div>
+      <div class="col-1" data-bs-cell>Club</div>
       <div class="col-2" data-bs-cell>Ciudad</div>
-      <div class="col-2" data-bs-cell> </div>      
+      <div class="col-1" data-bs-cell> </div>      
     </div>
 
     <!-- Table Rows -->
@@ -78,9 +79,10 @@ const handleClickAdd = () => {
       <div class="col-1" data-bs-cell>{{ item.identification }}</div>
       <div class="col-1" data-bs-cell>{{ item.sex }}</div>
       <div class="col-1" data-bs-cell>{{ item.age }}</div>
-      <div class="col-2" data-bs-cell>{{ item.club_detail.name }}</div>
+      <div class="col-2" data-bs-cell>{{ item.category_detail.name }}</div>      
+      <div class="col-1" data-bs-cell>{{ item.club_detail.name }}</div>
       <div class="col-2" data-bs-cell>{{ item.city }}</div>
-      <div class="col-2" data-bs-cell>
+      <div class="col-1" data-bs-cell>
         <button type="button" class="btn btn-primary" @click="() => handleClick(item)">📄</button>
       </div>      
     </div>

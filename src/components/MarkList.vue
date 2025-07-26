@@ -76,7 +76,7 @@ const handleClickAdd = () => {
       data-bs-row
     >
       <div class="col-4" data-bs-cell>{{ item.swimmer_detail.name }}</div>
-      <div class="col-2" data-bs-cell>{{ item.date_detail.date }}</div>
+      <div class="col-2" data-bs-cell>{{ item.date_detail.name }}</div>
       <div class="col-2" data-bs-cell>{{ item.meters }}</div>      
 
       <div class="col-2" data-bs-cell>
