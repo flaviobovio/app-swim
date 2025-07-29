@@ -1,7 +1,7 @@
 <script setup>
   import { ref, onMounted } from "vue";
   import { useRouter, useRoute } from 'vue-router';
-  import api from "../axios";
+  import api from "../axios.js";
   import { useSuccessToast } from '../composables/useSuccessToast.js';
 
   useSuccessToast();

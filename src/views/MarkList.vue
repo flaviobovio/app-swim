@@ -1,13 +1,17 @@
 <script setup>
   import { ref, onMounted } from "vue";
-  import { useRouter } from 'vue-router';
-  import api from "../axios"; 
+  import { useRouter, useRoute } from 'vue-router';
+  import api from "../axios.js";
   import { useSuccessToast } from '../composables/useSuccessToast.js';
 
   useSuccessToast();
 
 
   const router = useRouter();
+
+
+
+  
   
   // Props
   defineProps({
@@ -22,24 +26,24 @@
   // Methods
   const fetchData = async () => {
     try {
-      const response = await api.get("/swimmer/");
+      const response = await api.get("/mark/");
       items.value = response.data;
     } catch (err) {
-      error.value = "Failed to fetch data";
+      error.value = "Error al cargar datos";
     } finally {
       loading.value = false;
     }
   };
 
-  // Fetch data on mount
-  onMounted(fetchData);
+// Fetch data on mount
+onMounted(fetchData);
 
-const handleClick = (swimmer) => {
-  router.push(`/swimmerDetail/${swimmer.id}`);
+const handleClickEdit = (mark) => {
+  router.push(`/markDetail/${mark.id}`);
 };
 
 const handleClickAdd = () => {
-  router.push(`/swimmerDetail/new`);
+  router.push(`/markDetail/new`);
 };
 
 
@@ -51,7 +55,7 @@ const handleClickAdd = () => {
     <h3 class="text-center mb-5">{{ msg }}</h3>
 
     <div class="d-flex justify-content-between align-items-center mb-3">
-      <h2>🏊 Nadadores</h2>
+      <h2>⏱️ Marcas</h2>
       <button class="btn btn-primary" @click="() => handleClickAdd()">
         ➕ Agregar
       </button>
@@ -59,14 +63,10 @@ const handleClickAdd = () => {
 
     <!-- Table Header -->
     <div class="row bg-primary text-white " data-bs-header>
-      <div class="col-3" data-bs-cell>Nombre</div>
-      <div class="col-1" data-bs-cell>Documento</div>
-      <div class="col-1" data-bs-cell>Sexo</div>
-      <div class="col-1" data-bs-cell>Edad</div>
-      <div class="col-2" data-bs-cell>Categoría</div>
-      <div class="col-1" data-bs-cell>Club</div>
-      <div class="col-2" data-bs-cell>Ciudad</div>
-      <div class="col-1" data-bs-cell> </div>      
+      <div class="col-4" data-bs-cell>Nadador</div>
+      <div class="col-2" data-bs-cell>Fecha</div>
+      <div class="col-2" data-bs-cell>Metros</div>
+      <div class="col-2" data-bs-cell> </div>      
     </div>
 
     <!-- Table Rows -->
@@ -75,15 +75,12 @@ const handleClickAdd = () => {
       v-for="item in items" :key="item.id"
       data-bs-row
     >
-      <div class="col-3" data-bs-cell>{{ item.name }}</div>
-      <div class="col-1" data-bs-cell>{{ item.identification }}</div>
-      <div class="col-1" data-bs-cell>{{ item.sex }}</div>
-      <div class="col-1" data-bs-cell>{{ item.age }}</div>
-      <div class="col-2" data-bs-cell>{{ item.category_detail.name }}</div>      
-      <div class="col-1" data-bs-cell>{{ item.club_detail.name }}</div>
-      <div class="col-2" data-bs-cell>{{ item.city }}</div>
-      <div class="col-1" data-bs-cell>
-        <button type="button" class="btn btn-primary" @click="() => handleClick(item)">📄</button>
+      <div class="col-4" data-bs-cell>{{ item.swimmer_detail.name }}</div>
+      <div class="col-2" data-bs-cell>{{ item.date_detail.name }}</div>
+      <div class="col-2" data-bs-cell>{{ item.meters }}</div>      
+
+      <div class="col-2" data-bs-cell>
+        <button type="button" class="btn btn-primary" @click="() => handleClickEdit(item)">✏️</button>
       </div>      
     </div>
     <p v-if="loading">Cargando...</p>

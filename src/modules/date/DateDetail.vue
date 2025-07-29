@@ -1,7 +1,7 @@
 <template>
     <div class="container mt-4">
-      <h3>🔰 {{ isNew ? 'Agregar Club' : 'Editar Club' }}</h3>
-      <ClubForm
+      <h3>📅 {{ isNew ? 'Agregar Fecha' : 'Editar Fecha' }}</h3>
+      <DateForm
         v-model="form"
         :isNew="isNew"
         @submit="handleSubmit"
@@ -14,8 +14,8 @@
   import { reactive, onMounted, computed } from 'vue';
   import { useRouter, useRoute } from 'vue-router';
   import { toast } from 'vue3-toastify';  
-  import ClubForm from './ClubForm.vue';
-  import api from '../axios';
+  import DateForm from './DateForm.vue';
+  import api from '../../axios';
   
   const router = useRouter();
   const route = useRoute();
@@ -25,17 +25,17 @@
 
   
   const form = reactive({
-    name: '',
-    city: '',
+    date: '',
+    active: false,
   });
   
   onMounted(async () => {
     if (!isNew.value) {
       try {
-        const response = await api.get(`/club/${id}/`);
+        const response = await api.get(`/date/${id}/`);
         Object.assign(form, response.data);
       } catch {
-        toast.error(`Error al cargar club`);
+        toast.error(`Error al cargar fecha`);
       }
     }
   });
@@ -43,25 +43,25 @@
   const handleSubmit = async () => {
     try {
       if (isNew.value) {
-        await api.post('/club/', form);
+        await api.post('/date/', form);
       } else {
-        await api.put(`/club/${id}/`, form);
+        await api.put(`/date/${id}/`, form);
       }
-      router.push({ path: '/clubList/', query: { success: isNew.value ? 'Club agregado' : 'Club actualizado' } });
+      router.push({ path: '/dateList/', query: { success: isNew.value ? 'Fecha agregada' : 'Fecha actualizada' } });
 
     } catch {
-      toast.error('Falla al guardar club');
+      toast.error('Falla al guardar fecha');
     }
   };
   
   const handleDelete = async () => {
-    if (!confirm('Borrar marca?')) return;
+    if (!confirm('Borrar fecha?')) return;
     try {
-      await api.delete(`/club/${id}/`);
-      router.push('/clubList/');      
-      router.push({ path: '/clubList/', query: { success: 'Club borrado' } });
+      await api.delete(`/date/${id}/`);
+      router.push('/dateList/');      
+      router.push({ path: '/dateList/', query: { success: 'Fecha borrada' } });
     } catch {
-      toast.error('Falla al borrar club');
+      toast.error('Falla al borrar fecha');
     }
   };
   </script>

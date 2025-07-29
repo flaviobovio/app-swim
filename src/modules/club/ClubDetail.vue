@@ -1,7 +1,7 @@
 <template>
     <div class="container mt-4">
-      <h3>👥 {{ isNew ? 'Agregar Categoría' : 'Editar Categoría' }}</h3>
-      <CategoryForm
+      <h3>🔰 {{ isNew ? 'Agregar Club' : 'Editar Club' }}</h3>
+      <ClubForm
         v-model="form"
         :isNew="isNew"
         @submit="handleSubmit"
@@ -14,8 +14,8 @@
   import { reactive, onMounted, computed } from 'vue';
   import { useRouter, useRoute } from 'vue-router';
   import { toast } from 'vue3-toastify';  
-  import CategoryForm from './CategoryForm.vue';
-  import api from '../axios';
+  import ClubForm from './ClubForm.vue';
+  import api from '../../axios';
   
   const router = useRouter();
   const route = useRoute();
@@ -26,17 +26,16 @@
   
   const form = reactive({
     name: '',
-    age_min: '',
-    age_max: '',    
+    city: '',
   });
   
   onMounted(async () => {
     if (!isNew.value) {
       try {
-        const response = await api.get(`/category/${id}/`);
+        const response = await api.get(`/club/${id}/`);
         Object.assign(form, response.data);
       } catch {
-        toast.error(`Error al cargar categoría`);
+        toast.error(`Error al cargar club`);
       }
     }
   });
@@ -44,25 +43,25 @@
   const handleSubmit = async () => {
     try {
       if (isNew.value) {
-        await api.post('/category/', form);
+        await api.post('/club/', form);
       } else {
-        await api.put(`/category/${id}/`, form);
+        await api.put(`/club/${id}/`, form);
       }
-      router.push({ path: '/categoryList/', query: { success: isNew.value ? 'Categoría agregado' : 'Categoría actualizado' } });
+      router.push({ path: '/clubList/', query: { success: isNew.value ? 'Club agregado' : 'Club actualizado' } });
 
     } catch {
-      toast.error('Falla al guardar categoría');
+      toast.error('Falla al guardar club');
     }
   };
   
   const handleDelete = async () => {
-    if (!confirm('Borrar fecha?')) return;
+    if (!confirm('Borrar marca?')) return;
     try {
-      await api.delete(`/category/${id}/`);
-      router.push('/categoryList/');      
-      router.push({ path: '/categoryList/', query: { success: 'Categoría borrado' } });
+      await api.delete(`/club/${id}/`);
+      router.push('/clubList/');      
+      router.push({ path: '/clubList/', query: { success: 'Club borrado' } });
     } catch {
-      toast.error('Falla al borrar categoría');
+      toast.error('Falla al borrar club');
     }
   };
   </script>

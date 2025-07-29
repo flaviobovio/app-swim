@@ -38,8 +38,8 @@
 </template>
   
 <script setup>
-  import SwimmerSelect from './SwimmerSelect.vue';
-  import DateSelect from './DateSelect.vue';
+  import SwimmerSelect from '../../components/SwimmerSelect.vue';
+  import DateSelect from '../../components/DateSelect.vue';
   defineProps({
     modelValue: Object,
     isNew: Boolean,

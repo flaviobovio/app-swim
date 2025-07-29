@@ -15,7 +15,7 @@
   import { useRouter, useRoute } from 'vue-router';
   import { toast } from 'vue3-toastify';  
   import SwimmerForm from './SwimmerForm.vue';
-  import api from '../axios';
+  import api from '../../axios';
   
   const router = useRouter();
   const route = useRoute();

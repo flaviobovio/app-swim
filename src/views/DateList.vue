@@ -1,8 +1,9 @@
 <script setup>
   import { ref, onMounted } from "vue";
   import { useRouter, useRoute } from 'vue-router';
-  import api from "../axios";
+  import api from "../axios.js";
   import { useSuccessToast } from '../composables/useSuccessToast.js';
+  import { formatDate } from "../utils/formatDate.js";
 
   useSuccessToast();
 
@@ -26,7 +27,7 @@
   // Methods
   const fetchData = async () => {
     try {
-      const response = await api.get("/club/");
+      const response = await api.get("/date/");
       items.value = response.data;
     } catch (err) {
       error.value = "Error al cargar datos";
@@ -38,12 +39,12 @@
 // Fetch data on mount
 onMounted(fetchData);
 
-const handleClickEdit = (club) => {
-  router.push(`/clubDetail/${club.id}`);
+const handleClickEdit = (date) => {
+  router.push(`/dateDetail/${date.id}`);
 };
 
 const handleClickAdd = () => {
-  router.push(`/clubDetail/new`);
+  router.push(`/dateDetail/new`);
 };
 
 
@@ -55,7 +56,7 @@ const handleClickAdd = () => {
     <h3 class="text-center mb-5">{{ msg }}</h3>
 
     <div class="d-flex justify-content-between align-items-center mb-3">
-      <h2>🔰 Clubs</h2>
+      <h2>📅 Fechas</h2>
       <button class="btn btn-primary" @click="() => handleClickAdd()">
         ➕ Agregar
       </button>
@@ -63,8 +64,9 @@ const handleClickAdd = () => {
 
     <!-- Table Header -->
     <div class="row bg-primary text-white " data-bs-header>
-      <div class="col-4" data-bs-cell>Club</div>
-      <div class="col-2" data-bs-cell>Ciudad</div>
+      <div class="col-4" data-bs-cell>Nombre</div>
+      <div class="col-4" data-bs-cell>Fecha</div>
+      <div class="col-2" data-bs-cell>Activa</div>
       <div class="col-2" data-bs-cell> </div>      
     </div>
 
@@ -74,8 +76,9 @@ const handleClickAdd = () => {
       v-for="item in items" :key="item.id"
       data-bs-row
     >
-      <div class="col-4" data-bs-cell>{{ item.name }}</div>
-      <div class="col-2" data-bs-cell>{{ item.city }}</div>
+      <div class="col-4" data-bs-cell>{{ item.name }}</div>    
+      <div class="col-4" data-bs-cell>{{ formatDate(item.date) }}</div>
+      <div class="col-2" data-bs-cell>{{ (item.active) ? "☑️" : "" }}</div>
 
       <div class="col-2" data-bs-cell>
         <button type="button" class="btn btn-primary" @click="() => handleClickEdit(item)">✏️</button>

@@ -1,21 +1,21 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import LoginView from './components/LoginView.vue';
+import LoginView from './views/LoginView.vue';
 
-import SwimmerList from './components/SwimmerList.vue'
-import SwimmerDetail from './components/SwimmerDetail.vue';
-import DateList from './components/DateList.vue'
-import DateDetail from './components/DateDetail.vue'
-import ClubList from './components/ClubList.vue';
-import ClubDetail from './components/ClubDetail.vue';
+import SwimmerList from './views/SwimmerList.vue'
+import SwimmerDetail from './modules/swimmer/SwimmerDetail.vue';
+import DateList from './views/DateList.vue'
+import DateDetail from './modules/date/DateDetail.vue'
+import ClubList from './views/ClubList.vue';
+import ClubDetail from './modules/club/ClubDetail.vue';
 
-import CategoryList from './components/CategoryList.vue';
-import CategoryDetail from './components/CategoryDetail.vue';
+import CategoryList from './views/CategoryList.vue';
+import CategoryDetail from './modules/category/CategoryDetail.vue';
 
-import MarkList from './components/MarkList.vue';
-import MarkDetail from './components/MarkDetail.vue';
+import MarkList from './views/MarkList.vue';
+import MarkDetail from './modules/mark/MarkDetail.vue';
 
 
-import NotImplementedYet from './components/NotImplementedYet.vue'
+import NotImplementedYet from './views/NotImplementedYet.vue'
 
 const routes = [
   { path: '/', component: NotImplementedYet },

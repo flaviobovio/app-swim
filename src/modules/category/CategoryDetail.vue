@@ -1,7 +1,7 @@
 <template>
     <div class="container mt-4">
-      <h3>📅 {{ isNew ? 'Agregar Fecha' : 'Editar Fecha' }}</h3>
-      <DateForm
+      <h3>👥 {{ isNew ? 'Agregar Categoría' : 'Editar Categoría' }}</h3>
+      <CategoryForm
         v-model="form"
         :isNew="isNew"
         @submit="handleSubmit"
@@ -14,8 +14,8 @@
   import { reactive, onMounted, computed } from 'vue';
   import { useRouter, useRoute } from 'vue-router';
   import { toast } from 'vue3-toastify';  
-  import DateForm from './DateForm.vue';
-  import api from '../axios';
+  import CategoryForm from './CategoryForm.vue';
+  import api from '../../axios';
   
   const router = useRouter();
   const route = useRoute();
@@ -25,17 +25,18 @@
 
   
   const form = reactive({
-    date: '',
-    active: false,
+    name: '',
+    age_min: '',
+    age_max: '',    
   });
   
   onMounted(async () => {
     if (!isNew.value) {
       try {
-        const response = await api.get(`/date/${id}/`);
+        const response = await api.get(`/category/${id}/`);
         Object.assign(form, response.data);
       } catch {
-        toast.error(`Error al cargar fecha`);
+        toast.error(`Error al cargar categoría`);
       }
     }
   });
@@ -43,25 +44,25 @@
   const handleSubmit = async () => {
     try {
       if (isNew.value) {
-        await api.post('/date/', form);
+        await api.post('/category/', form);
       } else {
-        await api.put(`/date/${id}/`, form);
+        await api.put(`/category/${id}/`, form);
       }
-      router.push({ path: '/dateList/', query: { success: isNew.value ? 'Fecha agregada' : 'Fecha actualizada' } });
+      router.push({ path: '/categoryList/', query: { success: isNew.value ? 'Categoría agregado' : 'Categoría actualizado' } });
 
     } catch {
-      toast.error('Falla al guardar fecha');
+      toast.error('Falla al guardar categoría');
     }
   };
   
   const handleDelete = async () => {
     if (!confirm('Borrar fecha?')) return;
     try {
-      await api.delete(`/date/${id}/`);
-      router.push('/dateList/');      
-      router.push({ path: '/dateList/', query: { success: 'Fecha borrada' } });
+      await api.delete(`/category/${id}/`);
+      router.push('/categoryList/');      
+      router.push({ path: '/categoryList/', query: { success: 'Categoría borrado' } });
     } catch {
-      toast.error('Falla al borrar fecha');
+      toast.error('Falla al borrar categoría');
     }
   };
   </script>
